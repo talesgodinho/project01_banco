@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Transacoes {
 
-    private int conta;
+    private String conta;
     private String cpf;
     private String tipo;
     private Double valor;
     private String dataHora;
     private String mensagem;
 
-    public Transacoes(int conta, String cpf, String tipo, Double valor, String dataHora, String mensagem) {
+    public Transacoes(String conta, String cpf, String tipo, Double valor, String dataHora, String mensagem) {
         this.conta = conta;
         this.cpf = cpf;
         this.tipo = tipo;
@@ -22,8 +22,8 @@ public class Transacoes {
 
     public static ArrayList<Transacoes> transacoesArray = new ArrayList<>();
 
-    public String getCpf() {
-        return cpf;
+    public String getConta() {
+        return conta;
     }
 
     @Override
