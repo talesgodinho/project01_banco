@@ -1,6 +1,5 @@
 package com.br.tales.menu;
 
-import com.br.tales.contas.Conta;
 import com.br.tales.contas.ContaCorrente;
 
 import java.util.Random;
@@ -14,36 +13,65 @@ public class MenuMain{
         System.out.println("\n--- BEM-VINDO AO BANCO DEVinHOUSE ---");
         System.out.println("O que você deseja fazer hoje?");
         System.out.println("1 - Abrir uma conta\n2 - Acessar minha conta\n3 - Acessar administração do sistema\n4 - SAIR");
-        System.out.print("Digite o número da opção desejada: ");
-        int op = Integer.parseInt(input.nextLine());
-        MenuMain.executaMenu(op);
+        MenuMain.executaMenu();
     }
 
-    public static void executaMenu(int op){
-        switch (op){
-            case 1 -> aberturaConta();
+    public static void executaMenu(){
 
-            case 2 -> {
+        int op;
 
+        do {
+            System.out.print("Digite o número da opção desejada: ");
+            op = Integer.parseInt(input.nextLine());
+
+            switch (op) {
+                case 1 -> aberturaConta();
+                case 2 -> optaTipo();
+
+                case 4 -> System.exit(0);
+                default -> System.out.println("Opção inválida, tente novamente");
             }
-            default ->
-                    System.out.println("Opção inválida, tente novamente");
-        }
+        } while (op != 1 && op != 2 && op != 3 && op != 4);
+    }
+
+    public static void optaTipo(){
+        System.out.println("\nQual tipo de conta você deseja acessar?\n1 - Conta Corrente\n2 - Conta poupança\n3 - Conta investimento\n4 - VOLTAR");
+
+        int op;
+
+        do {
+            System.out.print("Digite o número da opção desejada: ");
+            op = Integer.parseInt(input.nextLine());
+
+            switch (op) {
+                case 1 -> MenuCorrentista.logaUsuario();
+//                    case 2 ->
+                case 4 -> mostrarMenu();
+                default -> System.out.println("Opção inválida, tente novamente");
+            }
+        } while (op != 1 && op != 2 && op != 3 && op != 4);
+
     }
 
     public static void aberturaConta(){
         System.out.println("\n--- ABERTURA DE CONTA | BANCO DEVinHouse --- ");
         System.out.println("Qual tipo de conta você deseja abrir?");
         System.out.println("1 - Conta Corrente\n2 - Conta Poupança\n3 - Conta investimento\n4 - VOLTAR");
-        System.out.print("Digite o número da opção desejada: ");
-        int op = Integer.parseInt(input.nextLine());
 
-        switch (op){
-            case 1 -> abreCC();
-            case 2 -> abreCP();
-            case 3 -> abreCI();
-            case 4 -> mostrarMenu();
-        }
+        int op;
+
+        do {
+            System.out.print("Digite o número da opção desejada: ");
+            op = Integer.parseInt(input.nextLine());
+
+            switch (op) {
+                case 1 -> abreCC();
+                case 2 -> abreCP();
+                case 3 -> abreCI();
+                case 4 -> mostrarMenu();
+                default -> System.out.println("Opção inválida, tente novamente");
+            }
+        } while (op != 1 && op != 2 && op != 3 && op != 4);
     }
 
     public static void abreCC(){
@@ -55,18 +83,19 @@ public class MenuMain{
         System.out.print("Informe sua renda mensal: ");
         Double rendaMensal = Double.parseDouble(input.nextLine());
 
-        int conta = 0;
+        int contaId = 0;
 
         do {
             Random geraConta = new Random();
-            conta = geraConta.nextInt(10000) + 99999;
-        } while (!ContaCorrente.validaConta(conta));
+            contaId = geraConta.nextInt(10000) + 99999;
+        } while (!ContaCorrente.validaConta(contaId));
 
         boolean validaAg = false;
         String agencia = null;
         do {
             System.out.println("Em qual agência você deseja abrir a conta?");
             System.out.println("1 - FLORIANÓPOLIS\n2 - SÃO JOSÉ");
+            System.out.print("Digite o número correspondente à sua escolha: ");
             int ag = Integer.parseInt(input.nextLine());
             if (ag == 1){
                 agencia = "001 - FLORIANOPOLIS";
@@ -77,21 +106,21 @@ public class MenuMain{
             }
         } while (!validaAg);
 
-        Conta.contas.add(new ContaCorrente(nome, cpf, rendaMensal, conta, agencia));
+        ContaCorrente.contas.add(new ContaCorrente(nome, cpf, rendaMensal, contaId, agencia));
 
         Double cheque = ContaCorrente.getChequeEspecial();
-        System.out.println(nome + " sua conta de número: " + conta + " na agência " + agencia + " foi criada com sucesso." );
+        System.out.println("\n******* PARABÉNS ******* ");
+        System.out.println(nome + " sua conta de número: " + contaId+ " na agência " + agencia + " foi criada com sucesso." );
         System.out.printf("Você possui cheque especial aprovado no valor de: R$ %.2f", ContaCorrente.getChequeEspecial());
-        System.out.println("\nVocê será redirecionado para o login de sua conta ...");
+        System.out.println("\nVocê será redirecionado para o menu inicial ...\n");
         mostrarMenu();
-
-//        ContaCorrente.exibeArray();
-
     }
 
     public static void abreCP(){
     }
 
     public static void abreCI(){
+
     }
+
 }

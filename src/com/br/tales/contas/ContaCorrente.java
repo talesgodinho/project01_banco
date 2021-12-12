@@ -5,11 +5,21 @@ public class ContaCorrente extends Conta{
 
     public ContaCorrente(String nome, String cpf, double rendaMensal, int conta, String agencia) {
         super(nome, cpf, rendaMensal, conta, agencia);
-        chequeEspecial = rendaMensal * 0.3;
+        setChequeEspecial(rendaMensal * 0.3); // Defino o valor de cheque especial para 30% da renda mensal do cliente
+        setSaldo(getSaldo()+getChequeEspecial());
+    }
+
+    public static void setChequeEspecial(double chequeEspecial) {
+        ContaCorrente.chequeEspecial = chequeEspecial;
     }
 
     public static double getChequeEspecial() {
         return chequeEspecial;
+    }
+
+    @Override
+    public void setSaldo(double saldo) {
+        super.setSaldo(saldo);
     }
 
     @Override
@@ -22,11 +32,8 @@ public class ContaCorrente extends Conta{
         return super.getConta();
     }
 
-        
-
-    public static void exibeArray(){
-        for (int i = 0; i<contas.size(); i++)
-            System.out.println(contas.get(i).toString());
+    @Override
+    public String getCpf() {
+        return super.getCpf();
     }
-
 }
