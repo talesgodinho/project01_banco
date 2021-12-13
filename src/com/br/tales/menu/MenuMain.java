@@ -1,5 +1,6 @@
 package com.br.tales.menu;
 
+import com.br.tales.contas.Conta;
 import com.br.tales.contas.ContaCorrente;
 import com.br.tales.contas.ContaInvestimento;
 import com.br.tales.contas.ContaPoupanca;
@@ -81,13 +82,23 @@ public class MenuMain{
         System.out.println("\nVOCÊ ESTÁ ABRINDO UMA NOVA CONTA CORRENTE NO BANCO DEVinHOuse!");
         System.out.print("Informe seu nome completo: ");
         String nome = input.nextLine();
+
         System.out.print("Informe seu CPF (SOMENTE NÚMEROS): ");
-        String cpf = input.nextLine();
+        String cpf = input.nextLine();;
+
+        if (!Conta.validaCpf(cpf)){
+            do {
+                System.out.println("ERRO! O CPF informado não é válido.");
+                System.out.print("Informe seu CPF (SOMENTE NÚMEROS): ");
+                cpf = input.nextLine();
+            }while (!Conta.validaCpf(cpf));
+        }
+
         System.out.print("Informe sua renda mensal: ");
         double rendaMensal = Double.parseDouble(input.nextLine());
 
-       int contaId = 0;
-       String contaStr;
+        int contaId = 0;
+        String contaStr;
 
         do {
             Random random = new Random();
@@ -126,8 +137,18 @@ public class MenuMain{
         System.out.println("*** Aqui seu dinheiro rende 0.44% ao mês ***");
         System.out.print("Informe seu nome completo: ");
         String nome = input.nextLine();
+
         System.out.print("Informe seu CPF (SOMENTE NÚMEROS): ");
         String cpf = input.nextLine();
+
+        if (!Conta.validaCpf(cpf)){
+            do {
+                System.out.println("ERRO! O CPF informado não é válido.");
+                System.out.print("Informe seu CPF (SOMENTE NÚMEROS): ");
+                cpf = input.nextLine();
+            }while (!Conta.validaCpf(cpf));
+        }
+
         System.out.print("Informe sua renda mensal: ");
         double rendaMensal = Double.parseDouble(input.nextLine());
 
@@ -171,8 +192,18 @@ public class MenuMain{
         System.out.println("*** Aqui seu dinheiro rende muito! ***");
         System.out.print("Informe seu nome completo: ");
         String nome = input.nextLine();
+
         System.out.print("Informe seu CPF (SOMENTE NÚMEROS): ");
         String cpf = input.nextLine();
+
+        if (!Conta.validaCpf(cpf)){
+            do {
+                System.out.println("ERRO! O CPF informado não é válido.");
+                System.out.print("Informe seu CPF (SOMENTE NÚMEROS): ");
+                cpf = input.nextLine();
+            }while (!Conta.validaCpf(cpf));
+        }
+
         System.out.print("Informe sua renda mensal: ");
         double rendaMensal = Double.parseDouble(input.nextLine());
 
