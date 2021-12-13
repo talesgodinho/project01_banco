@@ -214,6 +214,50 @@ public class Conta{
         MenuAdminBanco.mostraMenuAdmin();
     }
 
+    public static boolean validaCpf(String cpf) {
+
+        char digVer1, digVer2;
+
+        // Verifica se o cpf é formado por números repetidos ou se o tamanho é menor que 11 digitos
+        if (cpf.equals("00000000000") || cpf.equals("11111111111") || cpf.equals("22222222222") ||
+                cpf.equals("33333333333") || cpf.equals("44444444444") || cpf.equals("55555555555") ||
+                cpf.equals("66666666666") || cpf.equals("77777777777") || cpf.equals("88888888888") ||
+                cpf.equals("99999999999") || cpf.length() != 11)
+            return (false);
+
+        // Verifica o digito verificador 1 (divVer1)
+        int somatorio = 0;
+        int pos = 10;
+        for (int i = 0; i < 9; i++) {
+            int num = ((int) (cpf.charAt(i) - 48) * pos);
+            somatorio += num;
+            pos--;
+        }
+        int sobra = 11 - (somatorio % 11);
+        if ((sobra == 10) || (sobra == 11))
+            digVer1 = '0';
+        else
+            digVer1 = (char) (sobra + 48);
+
+        //Verifica o digito verificador 2 (divVer2)
+        somatorio = 0;
+        pos = 11;
+        for (int i = 0; i < 10; i++) {
+            int num = ((int) (cpf.charAt(i) - 48) * pos);
+            somatorio += num;
+            pos--;
+        }
+        sobra = 11 - (somatorio % 11);
+        if ((sobra == 10) || (sobra == 11))
+            digVer2 = '0';
+        else
+            digVer2 = (char) (sobra + 48);
+
+        if ((digVer1 == cpf.charAt(9)) && (digVer2 == cpf.charAt(10)))
+            return (true);
+        else return (false);
+    }
+
     @Override
     public String toString() {
         return "Conta{" +

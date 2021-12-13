@@ -2,10 +2,11 @@ package com.br.tales;
 
 import com.br.tales.menu.MenuMain;
 
-/*Projeto do módulo 1 do Tech-Dive
+/*
+Projeto do módulo 1 do Tech-Dive
 Instituto Senai de Tecnologia - Santa Catarina
-
-Desenvolvido por Tales Felix da Luz Godinho | Programador I - IST */
+Desenvolvido por Tales Felix da Luz Godinho | Programador I - IST
+*/
 
 public class Main {
 
